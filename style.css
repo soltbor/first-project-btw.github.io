@@ -1,0 +1,375 @@
+/* Базовые сбросы стилей и настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
+    overflow-x: hidden;
+    background: #000000;
+    position: relative;
+    width: 100%;
+}
+
+/* Canvas для частиц */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Стили для полноэкранных секций */
+.section {
+    min-height: 100vh; /* Заменяем height на min-height */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Меняем center на flex-start */
+    align-items: center;
+    padding: 1rem;
+    scroll-snap-align: start;
+    position: relative;
+    text-align: center;
+    overflow: visible; /* Разрешаем переполнение для скролла */
+}
+
+/* Контейнер для принудительного скролла по секциям */
+.container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    position: relative;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+/* Стили для главного экрана */
+.hero {
+    justify-content: center; /* Для главного экрана оставляем center */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 4rem); /* Уменьшаем максимальный размер */
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.5s forwards;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 100%;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    max-width: 500px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.8s forwards;
+    color: #d8b4fe;
+    width: 100%;
+    line-height: 1.4;
+}
+
+/* Стили для секции с карточками */
+.components {
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: flex-start;
+    padding-top: 4rem; /* Добавляем отступ сверху */
+    padding-bottom: 2rem;
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: rgba(30, 30, 46, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateY(50px);
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    min-height: 180px; /* Минимальная высота карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #8b5cf6;
+    box-shadow: 
+        0 15px 30px -8px rgba(139, 92, 246, 0.4),
+        0 0 20px rgba(168, 85, 247, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #c084fc;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.card p {
+    line-height: 1.5;
+    color: #e9d5ff;
+    font-size: 0.95rem;
+    max-width: 100%;
+    flex-grow: 1;
+}
+
+/* Стили для секции с ОС */
+.os-content {
+    max-width: 900px;
+    opacity: 0;
+    transform: translateY(50px);
+    background: rgba(30, 30, 46, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+    box-sizing: border-box;
+}
+
+.os-content h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.os-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    color: #e9d5ff;
+    max-width: 100%;
+}
+
+/* Анимации появления */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Индикатор прокрутки */
+.scroll-indicator {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.scroll-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(139, 92, 246, 0.3);
+    margin: 0.8rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.scroll-dot.active {
+    background: #8b5cf6;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+    transform: scale(1.2);
+}
+
+.scroll-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: transparent;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .section {
+        min-height: 100vh;
+        padding: 0.5rem;
+        justify-content: flex-start;
+    }
+    
+    .hero {
+        padding-top: 3rem;
+        justify-content: center;
+    }
+    
+    .components {
+        padding-top: 3rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+        min-height: 160px;
+        border-radius: 14px;
+    }
+
+    .card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .section-title {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .os-content {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+        width: calc(100% - 1rem);
+        border-radius: 16px;
+    }
+
+    .os-content h2 {
+        margin-bottom: 1.2rem;
+    }
+
+    .os-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .scroll-indicator {
+        right: 0.5rem;
+    }
+
+    .hero h1, .hero p {
+        padding: 0 0.5rem;
+    }
+    
+    /* Убираем hover-эффекты на тач-устройствах */
+    .card:hover {
+        transform: none;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    
+    .hero p {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+    
+    .card {
+        padding: 1rem;
+        min-height: 140px;
+    }
+    
+    .card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Специальные стили для карточек периферии */
+.peripherals-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 1200px;
+}
+
+.peripherals-grid .card {
+    padding: 1.5rem;
+}
+
+/* Фикс для мобильных браузеров с адресной строкой */
+@media (max-height: 700px) and (orientation: portrait) {
+    .section {
+        min-height: 100svh; /* Используем svh для лучшей поддержки мобильных */
+    }
+    
+    .container {
+        height: 100svh;
+    }
+}
